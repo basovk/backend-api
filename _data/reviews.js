@@ -1,4 +1,4 @@
-[
+const reviews=[
 	{
 		"_id": "5d7a514b5d2c12c7449be020",
 		"title": "Learned a ton!",
@@ -64,3 +64,5 @@
 		"user": "5c8a1d5b0190b214360dc040"
 	}
 ]
+
+export default reviews

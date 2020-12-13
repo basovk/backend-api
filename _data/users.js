@@ -1,4 +1,4 @@
-[
+const users=[
 	{
 		"_id": "5d7a514b5d2c12c7449be042",
 		"name": "Admin Account",
@@ -105,3 +105,5 @@
 		"password": "123456"
 	}
 ]
+
+export default users
