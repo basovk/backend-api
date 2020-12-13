@@ -8,6 +8,7 @@ dotenv.config({ path: './config/config.env' })
 
 // Load models
 import Bootcamp from './models/Bootcamp.js'
+import Course from './models/Course.js'
 
 // Connect to DB
 mongoose.connect(process.env.MONGO_URI, {
@@ -19,11 +20,13 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // Read data
 import bootcamps from './_data/bootcamps.js'
+import courses from './_data/courses.js'
 
 // Import into DB
 const importData = async () => {
   try {
     await Bootcamp.create(bootcamps)
+    await Course.create(courses)
 
     console.log('Data Imported...'.green.inverse)
     process.exit()
@@ -36,6 +39,7 @@ const importData = async () => {
 const deleteData = async () => {
   try {
     await Bootcamp.deleteMany()
+    await Course.deleteMany()
 
     console.log('Data Destroyed...'.red.inverse)
     process.exit()
