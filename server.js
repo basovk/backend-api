@@ -3,6 +3,15 @@ import dotenv from 'dotenv'
 import morgan from 'morgan'
 import colors from 'colors'
 import errorHandler from './middleware/error.js'
+import fileUpload from 'express-fileupload'
+import path from 'path'
+import cookieParser from 'cookie-parser'
+import mongoSanitize from 'express-mongo-sanitize'
+import helmet from 'helmet'
+import xss from 'xss-clean'
+import rateLimit from 'express-rate-limit'
+import hpp from 'hpp'
+import cors from 'cors'
 
 // Database
 import connectDB from './config/db.js'
@@ -16,6 +25,9 @@ connectDB()
 // Route files
 import bootcamps from './routes/bootcamps.js'
 import courses from './routes/courses.js'
+import auth from './routes/auth.js'
+import users from './routes/users.js'
+import reviews from './routes/reviews.js'
 
 // Initialize express
 const app = express()
@@ -23,14 +35,50 @@ const app = express()
 // Body parses to use data from req.body
 app.use(express.json())
 
+// Cookie parser
+app.use(cookieParser())
+
+// Sanitize data
+app.use(mongoSanitize())
+
+// Set security headers
+app.use(helmet())
+
+// Prevent XSS attacks
+app.use(xss())
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 10 * 60 * 1000, // 10 mins
+  max: 100 // 100 requests
+})
+
+app.use(limiter)
+
+// Prevent http param pollution
+app.use(hpp())
+
+// Enable CORS
+app.use(cors())
+
 // Dev logging middleware
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
 }
 
+// File uploading
+app.use(fileUpload())
+
+// Set static folder
+// using __dirname??
+app.use(express.static('/public'))
+
 // Mount routers
 app.use('/api/v1/bootcamps', bootcamps)
 app.use('/api/v1/courses', courses)
+app.use('/api/v1/auth', auth)
+app.use('/api/v1/users', users)
+app.use('/api/v1/reviews', reviews)
 
 app.use(errorHandler)
 
