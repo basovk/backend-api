@@ -1,10 +1,14 @@
 # DevCamper API
 
-> Backend API for DevCamper application, which is a bootcmap directory website
+> Backend API for DevCamper application, which is a bootcamp directory website
 
-## Usage
+## Preview and documentation of the API
 
-Update the values in config.env to your own
+Open [https://documenter.getpostman.com/view/8693761/TVsvhnPL](https://documenter.getpostman.com/view/8693761/TVsvhnPL) to view it in browser.
+
+## Skills needed
+
+Nodejs, Express, Postman, MongoDB
 
 ## Install Dependencies
 
