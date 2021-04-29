@@ -10,6 +10,10 @@ Open [https://documenter.getpostman.com/view/8693761/TVsvhnPL](https://documente
 
 Nodejs, Express, Postman, MongoDB
 
+## Implemented querying, sorting, pagination, select
+
+Used Mongoose models to calculate
+
 ## Install Dependencies
 
 ```
